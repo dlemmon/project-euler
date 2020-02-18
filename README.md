@@ -10,13 +10,13 @@ and named after the famous mathematician [Leonhard Euler](https://en.wikipedia.o
 
 The problem set varies in difficulty and it is very mathematical in its nature. 
 Due to this mathematical form I used haskell for solving them, 
-it gives a chance to use pure functional programming, 
+it gives a chance to use pure functional programming.  
 Haskell also plays very well with mathematical objects such as 
 fractions, infinite integers, infinite lists, lambda calculus...
 
 ## Loading solution from GHCi
 
-Start GHCi from the `src` directory load the problem that you want an call solution from the haskell interpreter.
+Start GHCi from the `src` directory, load the problem that you want and call the solution without arguments from the haskell interpreter.
 
       $ cd src 
       $ ghci

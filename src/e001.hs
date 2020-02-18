@@ -14,4 +14,7 @@ sumMultiplesBelow d y =  foldl (+) 0 multiples
     where multiples = filter (filterMultiples d) [2..(y-1)]
     
 solution = sumMultiplesBelow [3,5] 1000 
+
+main = do
+  print solution
  

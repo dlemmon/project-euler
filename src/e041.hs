@@ -11,14 +11,15 @@ What is the largest n-digit pandigital prime that exists?
 -}
 
 import Primes
+import Utils
 import Data.Char
 import Data.List
 
-pandigital :: Int -> [Integer]
-pandigital d = map toInt $ permutations ['1'..(intToDigit d)]
-    where toInt x = read x::Integer
 
-reversePandigitals d = reverse $ sort $ pandigital d
+pandigital d = map toInt $ permutations ['1'..(intToDigit d)]
+    where toInt x = read x::Int
+
+reversePandigitals d = sortBy (flip compare) $ pandigital d
 
 
 get (Just x) = x 
@@ -27,3 +28,4 @@ solution = get $ foldl findFirstPrime Nothing  [9,8..4]
     where findFirstPrime acc digits = if acc == Nothing 
             then find isprime $ reversePandigitals digits 
             else acc  
+

@@ -35,7 +35,7 @@ next cand@(a,b,c) = if (t == p) then
 takeNext cand@(True,_) = cand
 takeNext cand@(False,triplet) = takeNext $ next triplet
 
-printSol (_,(a,b,c)) = "T"++show a++" P"++show b++" H"++ show c 
+printSol (_,(a,b,c)) = (show $ polygonalNum 3 a)++" = T"++show a++" = P"++show b++" = H"++ show c 
 
 solution = printSol $ takeNext (False,(286,165,143))
 

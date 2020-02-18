@@ -21,7 +21,7 @@ module Primes where
   isprime n = isprime6 n && minPrimeFact n == n
   
   -- 6n+-1
-  isprime6 n = mod6 == 1 || mod6 == 5
+  isprime6 n = n < 4 || mod6 == 1 || mod6 == 5
       where mod6 = mod n 6
  
   minPrimeFact n = head list
@@ -61,6 +61,13 @@ module Primes where
    
   lucasLehmer 2 = True
   lucasLehmer p = s (2^p-1) (p-1) == 0
+  
+  primetable cols n = concat $ map (\x -> printLine x (x+cols-1)) [1,(cols+1)..n]
+      where printLine x y = lpad 12 x ++ "  " ++ ( map (\x -> if elem x sl then 'x' else '.') [x,(x+2)..y] ) ++ "\n" 
+                where sl = sublist x y prim
+            prim = 1 : primesToNA n
+            sublist x y list = takeWhile (<= y) $ dropWhile (< x) list
+            lpad len n = let numb = show n in (take (len - length numb) $ repeat ' ') ++ numb  
      
 
 

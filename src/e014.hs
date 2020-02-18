@@ -41,9 +41,11 @@ chain l stop  = l ++ if next == stop then [next] else chain [next] stop
 solution = fst $ maximumBy (comparing snd) $ toList mapping
 
 mapping = fromList [(i, collatz i) | i <- [1..1000000]]
-  where collatz 1 = 0
-        collatz x = if next <= 1000000 then 1 + mapping ! next
-                                     else 1 + collatz next
+
+-- return the collatz chain length of a given number 
+collatz 1 = 0
+collatz x = if next <= 1000000 then 1 + mapping ! next
+        else 1 + collatz next
           where next = term x
 
 

@@ -22,20 +22,27 @@ In the first one-thousand expansions, how many fractions contain a numerator wit
 
 
 
-
 -}
 
+
+-- (map f bs) `using` parList rdeepseq
 import Math 
 import Data.Ratio
+import Control.Parallel.Strategies
 
 moreDigitsNum x = digits (numerator x) > digits (denominator x)
     where digits x = length $ show x 
 
-howMany until = length $ filter moreDigitsNum $ map (expandFract . makeList) [1..until] 
-    where makeList until = (1:(take (until-1) $ repeat 2))
-    
+howMany :: Int -> [Int]
+howMany until = using convs (parList rdeepseq)
+    where makeList x = take x sqrt2Fract
+          convs = map (countMore . expandFract . makeList) [1..until] 
+          countMore x = if moreDigitsNum x then 1 else 0  
 
+   
     
-solution = howMany 1000
+sqrt2Fract = 1:(repeat 2)
+    
+solution = sum $ howMany 1000
 
 

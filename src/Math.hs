@@ -36,3 +36,23 @@ module Math where
   expandFract ([h])  = h % 1
   expandFract (h:hs) = h % 1 + (1 / ( expandFract hs)) 
   
+
+  -- getContFract number 1 = [floor number]
+  getContFract number = if snd p == 0.0 then [fst p] 
+          else if fst p > 10^10 then []
+          else (fst p) : getContFract (1/(snd p))
+      where p = properFraction number
+      
+  --  fract properties
+  --  [..,a,1] = [..,a+1]
+  --  0   [0,1]
+  --  1/2 [0,2]              =         [0,1,1]
+  --  1/3 [0,3]  = [0,2,1]   |     2/3 [0,1,2]   =  [0,1,1,1]     
+  --  1/4 [0,4]  = [0,3,1]   |     2/5 [0,2,2]   =  [0,2,1,1]   |  3/4 [0,1,3] = [0,1,2,1]  | 3/5 [0,1,1,2] = [0,1,1,1,1]
+
+  
+  reciprocalFract f = if head f == 0 
+          then tail f else 0 : f  
+          
+  convergents fract = map getConv $ init $ scanl (\x y -> x + 1) 1 fract 
+        where getConv n = expandFract $ take n fract 
